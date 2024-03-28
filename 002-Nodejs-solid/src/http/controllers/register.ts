@@ -13,6 +13,8 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
   const { name, email, password } = registerBodySchema.parse(request.body);
 
+  const password_hash = await hash(password, 6 )
+  
   try {
     await registerUseCase({
       name,
